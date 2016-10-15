@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba1d8860-0b1c-486c-8d97-c1204f785643" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/animation.js" afterPath="$PROJECT_DIR$/static/js/animation.js" />
     </list>
     <ignored path="ARKIE-LOGO-ANIMATION.iws" />
@@ -24,26 +23,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.7058825">
-              <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.45454547">
+              <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="animation.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="animation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/animation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3846154">
-              <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
+            <state vertical-scroll-proportion="-4.4444447">
+              <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
               <folding>
                 <element signature="e#133#2052#0" expanded="false" />
                 <element signature="e#639#1608#0" expanded="false" />
-                <element signature="e#2188#2811#0" expanded="false" />
-                <marker date="1476501982000" expanded="true" signature="1738:2022" placeholder="..." />
+                <marker date="1476502594000" expanded="true" signature="1738:2022" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -291,24 +289,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.7058825">
-          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/animation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3846154">
-          <caret line="114" column="3" selection-start-line="114" selection-start-column="3" selection-end-line="114" selection-end-column="3" />
+        <state vertical-scroll-proportion="-4.4444447">
+          <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
           <folding>
             <element signature="e#133#2052#0" expanded="false" />
             <element signature="e#639#1608#0" expanded="false" />
-            <element signature="e#2188#2811#0" expanded="false" />
-            <marker date="1476501982000" expanded="true" signature="1738:2022" placeholder="..." />
+            <marker date="1476502594000" expanded="true" signature="1738:2022" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45454547">
+          <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>

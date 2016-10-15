@@ -94,9 +94,9 @@ $(function() {
 
     var isReverse = false;
     var renderQueue = setInterval(function() {
-        if (offset>=length) {
+        if (offset===length) {
             isReverse = true;
-        } else if (offset>=0) {
+        } else if (offset===0) {
             isReverse = false;
         };
         if (!isReverse) {
