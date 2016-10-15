@@ -30,7 +30,7 @@ $(function() {
             y: a/2
         };
 
-        function offsetedSvg(offset) {
+        function frameSvg(offset) {
             var op1 = {
                 x: p1.x,
                 y: Math.sqrt(Math.pow(offset,2)*4/3)
@@ -65,7 +65,86 @@ $(function() {
               "L"+op6.x+" "+op6.y+
               "Z' /> ";
 
-            return path;
+            var fOffset = offset/2;
+            var b = 100;
+
+            var fp1 = op6;
+            var fp2 = {
+              x: fp1.x+Math.sqrt(Math.pow(fOffset,2)/3),
+              y: fp1.y-fOffset
+            };
+            var fp3 = {
+              x: fp2.x+Math.sqrt(Math.pow((b+Math.sqrt(Math.pow(fOffset,2)/3)),2)*3/4),
+              y: fp2.y+b/2
+            };
+            var fp15 = {
+              x: fp1.x,
+              y: fp1.y+Math.sqrt(Math.pow(fOffset,2)*4/3)
+            };
+            var fp14 = {
+              x: fp15.x+Math.sqrt(Math.pow((b-Math.sqrt(Math.pow(fOffset,2)/3)),2)*4/3),
+              y: fp15.y+b/2
+            };
+
+
+            var fp6 = op2;
+            var fp5 = {
+              x: fp6.x-Math.sqrt(Math.pow(fOffset,2)/3),
+              y: fp2.y
+            };
+            var fp4 = {
+              x: fp5.x-Math.sqrt(Math.pow((b+Math.sqrt(Math.pow(fOffset,2)/3)),2)*3/4),
+              y: fp3.y
+            };
+            var fp7 = {
+              x: fp6.x,
+              y: fp15.y
+            };
+            var fp8 = {
+              x: fp7.x-Math.sqrt(Math.pow((b-Math.sqrt(Math.pow(fOffset,2)/3)),2)*4/3),
+              y: fp14.y
+            };
+
+
+            var fp11 = op4;
+            var fp10 = {
+              x: fp11.x+fOffset,
+              y: fp11.y-Math.sqrt(Math.pow(fOffset,2)/3)
+            };
+            var fp12 = {
+              x: fp11.x-fOffset,
+              y: fp10.y
+            };
+            var fp9 = {
+              x: fp10.x,
+              y: fp10.y-b
+            };
+            var fp13 = {
+              x: fp12.x,
+              y: fp12.y-b
+            };
+
+
+
+            var fPath = "<path fill='black' d='" +
+              "M"+fp1.x+" "+fp1.y+
+              "L"+fp2.x+" "+fp2.y+
+              "L"+fp3.x+" "+fp3.y+
+              "L"+fp4.x+" "+fp4.y+
+              "L"+fp5.x+" "+fp5.y+
+              "L"+fp6.x+" "+fp6.y+
+              "L"+fp7.x+" "+fp7.y+
+              "L"+fp8.x+" "+fp8.y+
+              "L"+fp9.x+" "+fp9.y+
+              "L"+fp10.x+" "+fp10.y+
+              "L"+fp11.x+" "+fp11.y+
+              "L"+fp12.x+" "+fp12.y+
+              "L"+fp13.x+" "+fp13.y+
+              "L"+fp14.x+" "+fp14.y+
+              "L"+fp15.x+" "+fp15.y+
+              "Z' /> ";
+
+            return path+fPath;
         }
 
         var svg = "<svg viewBox='0 0 " +
@@ -81,13 +160,13 @@ $(function() {
           "L"+p5.x+" "+p5.y+
           "L"+p6.x+" "+p6.y+
           "Z' /> "+
-          offsetedSvg(offset)+
+          frameSvg(offset)+
           "</svg>";
 
         return svg;
     }
 
-    var fps = 50;
+    var fps = 24;
 
     var length = 250;
     var offset = 1;
@@ -112,4 +191,5 @@ $(function() {
         }
     },1000/fps);
 
+    //$('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), 40));
 });
