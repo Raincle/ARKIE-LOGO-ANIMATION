@@ -3,84 +3,113 @@ $(function() {
     var windowWidth = $(window).width();
     var windowHeight = $(window).height();
 
-    var polyHeight = Math.sqrt(Math.pow(250,2)-Math.pow(125,2));
-    var p1Obj = {
-        x:125,
-        y:0
-    };
-    var p2Obj = {
-        x:375,
-        y:0
-    };
-    var p3Obj = {
-        x:500,
-        y:polyHeight
-    };
-    var p4Obj = {
-        x:375,
-        y:2*polyHeight
-    };
-    var p5Obj = {
-        x:125,
-        y:2*polyHeight
-    };
-    var p6Obj = {
-        x:0,
-        y:polyHeight
-    };
 
-    function offsetedSvg(b) {
+    function initSvg(a,offset) {
         var p1 = {
-            x: 125 + Math.sqrt(Math.pow(b,2)/3),
-            y: b
+            x: Math.sqrt(Math.pow(a,2)*3/4),
+            y: 0
         };
         var p2 = {
-            x: 375- Math.sqrt(Math.pow(b,2)/3),
-            y: b
+            x: Math.sqrt(Math.pow(a,2)*3/4)*2,
+            y: a/2
         };
         var p3 = {
-            x: 500- Math.sqrt(Math.pow(b,2)*4/3),
-            y:polyHeight
+            x: p2.x,
+            y: a*3/2
         };
         var p4 = {
-            x: 375- Math.sqrt(Math.pow(b,2)/3),
-            y: 2*polyHeight-b
+            x: p1.x,
+            y: 2*a
         };
         var p5 = {
-            x: 125 + Math.sqrt(Math.pow(b,2)/3),
-            y: 2*polyHeight-b
+            x: 0,
+            y: a*3/2
         };
         var p6 = {
-            x: Math.sqrt(Math.pow(b,2)*4/3),
-            y: polyHeight
+            x: 0,
+            y: a/2
         };
 
-        var path = "<path fill='white' d='" +
-            "M"+p1.x+" "+p1.y+
-            "L"+p2.x+" "+p2.y+
-            "L"+p3.x+" "+p3.y+
-            "L"+p4.x+" "+p4.y+
-            "L"+p5.x+" "+p5.y+
-            "L"+p6.x+" "+p6.y+
-            "Z' /> ";
+        function offsetedSvg(offset) {
+            var op1 = {
+                x: p1.x,
+                y: Math.sqrt(Math.pow(offset,2)*4/3)
+            };
+            var op2 = {
+                x: p2.x-offset,
+                y: p2.y+Math.sqrt(Math.pow(offset,2)/3)
+            };
+            var op3 = {
+                x: p3.x-offset,
+                y: p3.y-Math.sqrt(Math.pow(offset,2)/3)
+            };
+            var op4 = {
+                x: p4.x,
+                y: p4.y-op1.y
+            };
+            var op5 = {
+                x: offset,
+                y: op3.y
+            };
+            var op6 = {
+                x: offset,
+                y: op2.y
+            };
 
-        return path;
+            var path = "<path fill='white' d='" +
+              "M"+op1.x+" "+op1.y+
+              "L"+op2.x+" "+op2.y+
+              "L"+op3.x+" "+op3.y+
+              "L"+op4.x+" "+op4.y+
+              "L"+op5.x+" "+op5.y+
+              "L"+op6.x+" "+op6.y+
+              "Z' /> ";
+
+            return path;
+        }
+
+        var svg = "<svg viewBox='0 0 " +
+          Math.sqrt(Math.pow(a,2)*3/4)*2 +
+          " " +
+          2*a +
+          "'> " +
+          "<path fill='black' d='" +
+          "M"+p1.x+" "+p1.y+
+          "L"+p2.x+" "+p2.y+
+          "L"+p3.x+" "+p3.y+
+          "L"+p4.x+" "+p4.y+
+          "L"+p5.x+" "+p5.y+
+          "L"+p6.x+" "+p6.y+
+          "Z' /> "+
+          offsetedSvg(offset)+
+          "</svg>";
+
+        return svg;
     }
 
+    var fps = 50;
 
-    var p1 = "M125 0";
-    var p2 = "L375 0";
+    var length = 250;
+    var offset = 1;
 
-    var p3 = "L500 "+polyHeight;
-    var p4 = "L375 "+2*polyHeight;
-    var p5 = "L125 "+2*polyHeight;
-    var p6 = "L0 "+polyHeight;
+    var isReverse = false;
+    var renderQueue = setInterval(function() {
+        if (offset>=length) {
+            isReverse = true;
+        } else if (offset>=0) {
+            isReverse = false;
+        };
+        if (!isReverse) {
+            offset += 1;
+            console.log('in render, offset: ',offset);
+            $('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), offset));
+        } else {
+            console.log('in reverse');
+            offset -= 1;
+            console.log('in render, offset: ',offset);
+            $('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), offset));
+            //clearInterval(renderQueue);
+        }
+    },1000/fps);
 
-    var svg = "<svg viewBox='0 0 500 500'> " +
-        "<path d='" +
-        p1+p2+p3+p4+p5+p6 +
-        "Z' /> " + offsetedSvg(5)+
-        "</svg>";
-
-    $('.animation-wrapper').html(svg);
 });
