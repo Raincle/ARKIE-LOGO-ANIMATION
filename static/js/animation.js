@@ -3,6 +3,7 @@ $(function() {
     var windowWidth = $(window).width();
     var windowHeight = $(window).height();
 
+    $('.full-logo').css({left:(windowWidth-500)/2});
 
     function initSvg(a,offset) {
         var p1 = {
@@ -66,34 +67,34 @@ $(function() {
               "Z' /> ";
 
             var fOffset = offset/2;
-            var b = 100;
+            var b = 55;
 
             var fp1 = op6;
             var fp2 = {
-              x: fp1.x+Math.sqrt(Math.pow(fOffset,2)/3),
-              y: fp1.y-fOffset
+              x: fp1.x+fOffset,
+              y: fp1.y-Math.sqrt(Math.pow(fOffset,2)/3)
             };
             var fp3 = {
-              x: fp2.x+Math.sqrt(Math.pow((b+Math.sqrt(Math.pow(fOffset,2)/3)),2)*3/4),
-              y: fp2.y+b/2
+              x: fp2.x+Math.sqrt(3/4*Math.pow((b+Math.sqrt(Math.pow(fOffset,2)*4/3)),2)),
+              y: fp2.y+b/2+Math.sqrt(Math.pow(fOffset,2)/3)
             };
             var fp15 = {
               x: fp1.x,
               y: fp1.y+Math.sqrt(Math.pow(fOffset,2)*4/3)
             };
             var fp14 = {
-              x: fp15.x+Math.sqrt(Math.pow((b-Math.sqrt(Math.pow(fOffset,2)/3)),2)*4/3),
-              y: fp15.y+b/2
+              x: fp15.x+Math.sqrt(3/4*Math.pow((b+Math.sqrt(Math.pow(fOffset,2)*4/3)),2)),
+              y: fp15.y+b/2+Math.sqrt(Math.pow(fOffset,2)/3)
             };
 
 
             var fp6 = op2;
             var fp5 = {
-              x: fp6.x-Math.sqrt(Math.pow(fOffset,2)/3),
+              x: fp6.x-fOffset,
               y: fp2.y
             };
             var fp4 = {
-              x: fp5.x-Math.sqrt(Math.pow((b+Math.sqrt(Math.pow(fOffset,2)/3)),2)*3/4),
+              x: fp5.x-Math.sqrt(3/4*Math.pow((b+Math.sqrt(Math.pow(fOffset,2)*4/3)),2)),
               y: fp3.y
             };
             var fp7 = {
@@ -101,7 +102,7 @@ $(function() {
               y: fp15.y
             };
             var fp8 = {
-              x: fp7.x-Math.sqrt(Math.pow((b-Math.sqrt(Math.pow(fOffset,2)/3)),2)*4/3),
+              x: fp7.x-Math.sqrt(3/4*Math.pow((b+Math.sqrt(Math.pow(fOffset,2)*4/3)),2)),
               y: fp14.y
             };
 
@@ -117,16 +118,16 @@ $(function() {
             };
             var fp9 = {
               x: fp10.x,
-              y: fp10.y-b
+              y: fp10.y-b-Math.sqrt(Math.pow(fOffset,2)*4/3)
             };
             var fp13 = {
               x: fp12.x,
-              y: fp12.y-b
+              y: fp9.y
             };
 
 
 
-            var fPath = "<path fill='black' d='" +
+            var fPath = "<path class='fillPath' fill='black' d='" +
               "M"+fp1.x+" "+fp1.y+
               "L"+fp2.x+" "+fp2.y+
               "L"+fp3.x+" "+fp3.y+
@@ -144,7 +145,28 @@ $(function() {
               "L"+fp15.x+" "+fp15.y+
               "Z' /> ";
 
-            return path+fPath;
+            var tp1 = {
+                x: fp1.x+Math.sqrt(Math.pow(4*fOffset+b,2)-Math.pow(b/2+2*fOffset,2)),
+                y: fp1.y+b/2+2*fOffset
+            };
+
+            var tp2 = {
+                x: fp6.x-Math.sqrt(Math.pow(4*fOffset+b,2)-Math.pow(b/2+2*fOffset,2)),
+                y: tp1.y
+            };
+
+            var tp3 = {
+                x: fp11.x,
+                y: fp11.y-b-4*fOffset
+            }
+
+            var tPath = "<path fill='white' d='" +
+                "M"+tp1.x+" "+tp1.y+
+                "L"+tp2.x+" "+tp2.y+
+                "L"+tp3.x+" "+tp3.y+
+                "Z' /> ";
+
+            return path+fPath+tPath;
         }
 
         var svg = "<svg viewBox='0 0 " +
@@ -152,7 +174,7 @@ $(function() {
           " " +
           2*a +
           "'> " +
-          "<path fill='black' d='" +
+          "<path class='fillPath' fill='black' d='" +
           "M"+p1.x+" "+p1.y+
           "L"+p2.x+" "+p2.y+
           "L"+p3.x+" "+p3.y+
@@ -166,17 +188,20 @@ $(function() {
         return svg;
     }
 
-    var fps = 24;
+    var fps = 60;
 
     var length = 250;
-    var offset = 1;
+    var offset = 250;
 
     var isReverse = false;
     var renderQueue = setInterval(function() {
         if (offset===length) {
             isReverse = true;
-        } else if (offset===0) {
+
+        } else if (offset===26) {
             isReverse = false;
+            clearInterval(renderQueue);
+            $('.full-logo').animate({opacity:1},1000);
         };
         if (!isReverse) {
             offset += 1;
@@ -187,9 +212,9 @@ $(function() {
             offset -= 1;
             console.log('in render, offset: ',offset);
             $('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), offset));
-            //clearInterval(renderQueue);
+            $('.fillPath').css({fill:'rgb(a,b,c)'});
         }
     },1000/fps);
 
-    //$('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), 40));
+    //$('.animation-wrapper').html(initSvg(Math.sqrt(Math.pow(length,2)*4/3), 26));
 });
